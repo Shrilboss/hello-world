@@ -1,0 +1,799 @@
+swagger: '2.0'
+info:
+  title: AD API
+  description: Use AD API to perform Active directory tasks.
+  version: '1.0'
+paths:
+  /GetAdGroupMembers/{groupName}:
+    get:
+      tags:
+        - Ad
+      summary: Get a list of a group members for a given group account name.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AdUserBase'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /GetAdGroupsByOU/{OU}:
+    get:
+      tags:
+        - Ad
+      summary: Get a list of a groups in an OU container. OU parameter must be HTML encoded.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: OU
+          required: true
+          type: string
+        - in: query
+          name: filter
+          type: string
+          default: ''
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AdGroup'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /GetAdGroup/{groupName}:
+    get:
+      tags:
+        - Ad
+      summary: Get an AD group by group account name.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdGroup'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /GetAdUserByName/{userName}:
+    get:
+      tags:
+        - Ad
+      summary: Get an AD user by account name.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: userName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdUser'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /GetAdUserByEmplId/{emplId}:
+    get:
+      tags:
+        - Ad
+      summary: Get an AD user by UCPath employee id.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: emplId
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdUser'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /GetAdUserByPid/{pid}:
+    get:
+      tags:
+        - Ad
+      summary: Get an AD user by student pid.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AdUser'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /Monitor:
+    get:
+      tags:
+        - Ad
+      summary: Heart beat transaction.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /AddGroupMember/{groupName}/{userName}:
+    post:
+      tags:
+        - Ad
+      summary: Add a group member to an existing group.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          type: string
+        - in: path
+          name: userName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /RemoveGroupMember/{groupName}/{userName}:
+    post:
+      tags:
+        - Ad
+      summary: Remove a member from a group.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          type: string
+        - in: path
+          name: userName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /AddGroupMembers/{groupName}:
+    post:
+      tags:
+        - Ad
+      summary: Add a list of memebers to a group.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: groupName
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AccountId'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /AddStudent:
+    post:
+      tags:
+        - Ad
+      summary: Add a new AD student.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NewAdUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /AddUser:
+    post:
+      tags:
+        - Ad
+      summary: Add a new AD user. OU must be HTML encoded.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: OU
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NewAdUser'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  /SetAdPassword/{userId}:
+    post:
+      tags:
+        - Ad
+      summary: Set AD Password for the given user by account name or pid.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '404':
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '406':
+          description: Not Acceptable
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+        '500':
+          description: Server Error
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/ProblemDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+definitions:
+  ProblemDetails:
+    type: object
+    properties:
+      type:
+        type: string
+      title:
+        type: string
+      status:
+        format: int32
+        type: integer
+      detail:
+        type: string
+      instance:
+        type: string
+    additionalProperties:
+      type: object
+  AdGroupBase:
+    type: object
+    properties:
+      samAccountName:
+        type: string
+      name:
+        type: string
+      distinguishedName:
+        type: string
+      displayName:
+        type: string
+      description:
+        type: string
+      userPrincipalName:
+        type: string
+      isSecurityGroup:
+        type: boolean
+      members:
+        type: array
+        items:
+          $ref: '#/definitions/AdUserBase'
+      emailAddress:
+        type: string
+      managedByLink:
+        type: string
+      managedBy:
+        type: string
+      owner:
+        type: string
+      parentOU:
+        type: string
+  AdUserBase:
+    type: object
+    properties:
+      samAccountName:
+        type: string
+      name:
+        type: string
+      distinguishedName:
+        type: string
+      displayName:
+        type: string
+      description:
+        type: string
+      userPrincipalName:
+        type: string
+      middleName:
+        type: string
+      givenName:
+        type: string
+      emailAddress:
+        type: string
+      voiceTelephoneNumber:
+        type: string
+      surname:
+        type: string
+      lastPasswordSet:
+        format: date-time
+        type: string
+      studentPid:
+        type: string
+      emplId:
+        type: string
+      groups:
+        type: array
+        items:
+          $ref: '#/definitions/AdGroupBase'
+  AdGroup:
+    description: Active Directory Group derived from AD.AdServiceCore.Models.AdGroupBase
+    type: object
+    properties:
+      samAccountName:
+        type: string
+      name:
+        type: string
+      distinguishedName:
+        type: string
+      displayName:
+        type: string
+      description:
+        type: string
+      userPrincipalName:
+        type: string
+      isSecurityGroup:
+        type: boolean
+      members:
+        type: array
+        items:
+          $ref: '#/definitions/AdUserBase'
+      emailAddress:
+        type: string
+      managedByLink:
+        type: string
+      managedBy:
+        type: string
+      owner:
+        type: string
+      parentOU:
+        type: string
+  AdUser:
+    description: Active Directory user model derived from AD.AdServiceCore.Models.AdUserBase
+    type: object
+    properties:
+      samAccountName:
+        type: string
+      name:
+        type: string
+      distinguishedName:
+        type: string
+      displayName:
+        type: string
+      description:
+        type: string
+      userPrincipalName:
+        type: string
+      middleName:
+        type: string
+      givenName:
+        type: string
+      emailAddress:
+        type: string
+      voiceTelephoneNumber:
+        type: string
+      surname:
+        type: string
+      lastPasswordSet:
+        format: date-time
+        type: string
+      studentPid:
+        type: string
+      emplId:
+        type: string
+      groups:
+        type: array
+        items:
+          $ref: '#/definitions/AdGroupBase'
+  AccountId:
+    type: object
+    properties:
+      accountName:
+        type: string
+  NewAdUser:
+    type: object
+    properties:
+      accountName:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      emailAddress:
+        type: string
+      mailDbIndex:
+        type: string
+      studentPid:
+        type: string
+      affiliationCode:
+        type: string
+securityDefinitions:
+  oauth2:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: https://api-qa.ucsd.edu:8243/authorize
+    tokenUrl: https://api-qa.ucsd.edu:8243/token
+    scopes:
+      adapi: AD API - full access
+  default:
+    type: oauth2
+    authorizationUrl: https://api.ucsd.edu:8243/authorize
+    flow: implicit
+    scopes: {}
+host: api.ucsd.edu:8243
+basePath: /Ad/v1
+schemes:
+  - https
+  - http
